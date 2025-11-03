@@ -2,6 +2,12 @@
 
 Author: Trevor Calderwood
 
+## Dependencies
+
+* FreeRTOS
+* make
+* arm-none-eabi-gcc
+* st-link
 
 ## Usage
 

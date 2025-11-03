@@ -5,16 +5,18 @@ Author: Trevor Calderwood
 
 ## Usage
 
-Copy the FreeRTOS 'stdint.h' into the demo directory
+Clone the [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS) and
+[FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel) repositories
+into the project, following the [Directory Structure](#directory-structure).
+
+Copy the FreeRTOS 'stdint.h' into the demo directory. This file can be found in
+FreeRTOS/FreeRTOS/Demo/PIC18_MPLAB/.
 
 ## Directory Structure
 
-./  
-|  
-|-- Makefile  
-|-- main.c  
-|-- FreeRTOS/			FreeRTOS git repository  
- 	|  
-	|-- FreeRTOS/  
-	 	|  
-		|-- Source/		FreeRTOS-Kernel git repository  
+* FreeRTOS-STM32F446RE-GCC/
+  * Makefile  
+  * main.c  
+  * [FreeRTOS/](https://github.com/FreeRTOS/FreeRTOS)
+    * FreeRTOS/  
+      * [Source/](https://github.com/FreeRTOS/FreeRTOS-Kernel)

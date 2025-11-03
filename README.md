@@ -2,6 +2,8 @@
 
 Author: Trevor Calderwood
 
+The FreeRTOS STM32F4xx Demo ported to GCC from IAR Workbench.
+
 ## Dependencies
 
 * FreeRTOS

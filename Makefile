@@ -1,5 +1,4 @@
-# Author:   Trevor Calderwood
-# Modified: 2025-11-03
+# Author: Trevor Calderwood
 #
 # This Makefile is for compiling FreeRTOS and flashing to an STM32F446RE.
 #

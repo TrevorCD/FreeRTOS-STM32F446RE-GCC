@@ -32,7 +32,9 @@ The Makefile includes three targets:
 
 * FreeRTOS-STM32F446RE-GCC/
   * Makefile  
-  * main.c  
+  * main.c
+  * include/
+    * stdint.h
   * [FreeRTOS/](https://github.com/FreeRTOS/FreeRTOS)
     * FreeRTOS/  
       * [Source/](https://github.com/FreeRTOS/FreeRTOS-Kernel)

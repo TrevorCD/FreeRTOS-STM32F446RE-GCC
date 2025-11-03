@@ -18,6 +18,13 @@ into the project, following the [Directory Structure](#directory-structure).
 Copy the FreeRTOS 'stdint.h' into the demo directory. This file can be found in
 FreeRTOS/FreeRTOS/Demo/PIC18_MPLAB/.
 
+### Make
+
+The Makefile includes three targets:
+* all (main.elf): the FreeRTOS binary
+* flash: flashes main.elf to the STM32F446RE using st-link
+* clean
+
 ## Directory Structure
 
 * FreeRTOS-STM32F446RE-GCC/

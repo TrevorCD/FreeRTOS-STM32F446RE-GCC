@@ -29,11 +29,9 @@ KERNEL := ./FreeRTOS/FreeRTOS/Source/
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
-# If failing on #include_next stdint.h inside of stdint.h:
-#   Copy the FreeRTOS stdint.h to the DEMO directory
-#   This file can be found in FreeRTOS/FreeRTOS/Demo/PIC18_MPLAB/
 #CFLAGS += -I/usr/lib/gcc/arm-none-eabi/14.2.0/include
-CFLAGS += -I$(DEMO) \
+CFLAGS += -I./include \
+          -I$(DEMO) \
           -I$(DEMO)Libraries/CMSIS \
           -I$(DEMO)Libraries/CMSIS/Device/ST/STM32F4xx/Include \
           -I$(DEMO)board \

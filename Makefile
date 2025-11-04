@@ -37,7 +37,7 @@ CFLAGS += -I./include \
           -I$(DEMO)board \
           -I$(DEMOI) \
           -I$(KERNEL)include \
-          -I$(KERNEL)portable/GCC/ARM_CM4F
+          -I$(KERNEL)portable/GCC/ARM_CM4F \
           -I./FreeRTOS/FreeRTOS/Demo/CORTEX_M4F_CEC1302_Keil_GCC/CMSIS
 
 CFLAGS += -DSTM32F4xx

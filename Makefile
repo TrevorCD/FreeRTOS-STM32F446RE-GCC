@@ -29,7 +29,6 @@ KERNEL := ./FreeRTOS/FreeRTOS/Source/
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
-#CFLAGS += -I/usr/lib/gcc/arm-none-eabi/14.2.0/include
 CFLAGS += -I./include \
           -I$(DEMO) \
           -I$(DEMO)Libraries/CMSIS \

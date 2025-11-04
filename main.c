@@ -123,8 +123,8 @@
 #include "death.h"
 
 /* Hardware and starter kit includes. */
-#include "arm_comm.h"
-#include "iar_stm32f407zg_sk.h"
+//#include "arm_comm.h"
+//#include "iar_stm32f407zg_sk.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
 

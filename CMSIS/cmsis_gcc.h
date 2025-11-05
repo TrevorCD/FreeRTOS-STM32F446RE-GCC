@@ -21,7 +21,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/*******************************************************************************
+ * EDITS:
+ * - included stdint.h to fix GCC compile error
+ ******************************************************************************/
 #ifndef __CMSIS_GCC_H
 #define __CMSIS_GCC_H
 
@@ -33,6 +36,8 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
 
+
+#include "stdint.h"
 
 /* ###########################  Core Function Access  ########################### */
 /** \ingroup  CMSIS_Core_FunctionInterface

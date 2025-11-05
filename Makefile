@@ -30,6 +30,7 @@ KERNEL := ./FreeRTOS/FreeRTOS/Source/
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
 CFLAGS += -I./include \
+          -I./CMSIS \
           -I$(DEMO) \
           -I$(DEMO)Libraries/CMSIS \
           -I$(DEMO)Libraries/CMSIS/Device/ST/STM32F4xx/Include \

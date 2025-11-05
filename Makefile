@@ -31,6 +31,8 @@ CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
 CFLAGS += -I./include \
           -I./CMSIS \
+          -I./Libraries \
+          -I./Libraries/STM32F4xx_StdPeriph_Driver/inc \
           -I$(DEMO) \
           -I$(DEMO)Libraries/CMSIS \
           -I$(DEMO)Libraries/CMSIS/Device/ST/STM32F4xx/Include \
@@ -38,7 +40,7 @@ CFLAGS += -I./include \
           -I$(DEMOI) \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F \
-          -I./FreeRTOS/FreeRTOS/Demo/CORTEX_M4F_CEC1302_Keil_GCC/CMSIS
+#          -I./FreeRTOS/FreeRTOS/Demo/CORTEX_M4F_CEC1302_Keil_GCC/CMSIS
 
 CFLAGS += -DSTM32F4xx
 

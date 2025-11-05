@@ -19,27 +19,21 @@ AS := arm-none-eabi-as
 CP := arm-none-eabi-objcopy
 
 # File path macros should include trailing '/'.
-# Path to demo for STM32F4xx
-DEMO   := ./FreeRTOS/FreeRTOS/Demo/CORTEX_M4F_STM32F407ZG-SK/
-# Path to Demo/Common/include/
-DEMOI  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
+DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
 # Path to FreeRTOS Kernel source code
 KERNEL := ./FreeRTOS/FreeRTOS/Source/
 
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
-CFLAGS += -I./include \
+CFLAGS += -I./ \
+          -I./include \
           -I./Libraries/CMSIS/ \
           -I./Libraries/STM32F4xx_StdPeriph_Driver/inc \
+          -I./Libraries/CMSIS/ST/STM32F4xx/Include \
           -I$(DEMO) \
-          -I$(DEMO)Libraries/CMSIS \
-          -I$(DEMO)Libraries/CMSIS/Device/ST/STM32F4xx/Include \
-          -I$(DEMO)board \
-          -I$(DEMOI) \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F \
-#          -I./FreeRTOS/FreeRTOS/Demo/CORTEX_M4F_CEC1302_Keil_GCC/CMSIS
 
 CFLAGS += -DSTM32F4xx
 
@@ -54,7 +48,7 @@ SRCS := main.c \
        $(KERNEL)list.c \
        $(KERNEL)portable/MemMang/heap_4.c \
        $(KERNEL)portable/GCC/ARM_CM4F/port.c \
-       $(DEMO)startup/startup_stm32f4xx.s
+       $./startup/startup_stm32f4xx.s
 
 OBJS := $(SRCS:.c=.o)
 

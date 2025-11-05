@@ -12,16 +12,18 @@
 #   - arm-none-eabi-gcc
 #   - st-link
 
+
 #-------------------------------[ Build Config ]--------------------------------
+
+# File path macros should include trailing '/'.
+# Path to common headers for FreeRTOS Demos: Demo/Common/include
+DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
+# Path to FreeRTOS Kernel source code
+KERNEL := ./FreeRTOS/FreeRTOS/Source/
 
 CC := arm-none-eabi-gcc
 AS := arm-none-eabi-as
 CP := arm-none-eabi-objcopy
-
-# File path macros should include trailing '/'.
-DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
-# Path to FreeRTOS Kernel source code
-KERNEL := ./FreeRTOS/FreeRTOS/Source/
 
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
@@ -35,6 +37,7 @@ CFLAGS += -I./ \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F \
 
+# Preprocessor definitions
 CFLAGS += -DSTM32F4xx
 
 # Vendor supplied script for flashing to MCU

@@ -126,7 +126,7 @@
 //#include "arm_comm.h"
 //#include "iar_stm32f407zg_sk.h"
 #include "stm32f4xx.h"
-#include "stm32f4xx_conf.h"
+//#include "stm32f4xx_conf.h"
 
 /* Priorities for the demo application tasks. */
 #define mainFLASH_TASK_PRIORITY                    ( tskIDLE_PRIORITY + 1UL )
@@ -387,7 +387,7 @@ static void prvSetupHardware( void )
     SystemInit();
 
     /* Ensure all priority bits are assigned as preemption priority bits. */
-    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+    NVIC_SetPriorityGrouping( NVIC_PriorityGroup_4 );
 
     /* Setup the LED outputs. */
     vParTestInitialise();

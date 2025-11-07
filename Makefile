@@ -20,6 +20,8 @@
 DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
 # Path to FreeRTOS Kernel source code
 KERNEL := ./FreeRTOS/FreeRTOS/Source/
+# Path to STM32CubeF4 CMSIS Drivers
+DRIVERS := ./STM32CubeF4/Drivers/
 
 CC := arm-none-eabi-gcc
 AS := arm-none-eabi-as
@@ -30,15 +32,15 @@ CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
 
 CFLAGS += -I./ \
           -I./include \
-          -I./Libraries/CMSIS/ \
-          -I./Libraries/STM32F4xx_StdPeriph_Driver/inc \
-          -I./Libraries/CMSIS/ST/STM32F4xx/Include \
+          -I$(DRIVERS)CMSIS/Include \
+          -I$(DRIVERS)CMSIS/Device/ST/STM32F4xx/Include \
           -I$(DEMO) \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F \
+#          -I./Libraries/STM32F4xx_StdPeriph_Driver/inc \
 
 # Preprocessor definitions
-CFLAGS += -DSTM32F4xx
+CFLAGS += -DSTM32F446xx
 
 # Vendor supplied script for flashing to MCU
 LDSCRIPT := STM32F446RE_FLASH.ld

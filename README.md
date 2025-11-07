@@ -21,10 +21,12 @@ Clone the [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS) and
 [STM32CubeF4](https://github.com/STMicroelectronics/STM32CubeF4) repositories
 into the project, using the --recursive flag.
 
-`git clone --recursive https://github.com/FreeRTOS/FreeRTOS`
-
-`git clone --recursive https://github.com/STMicroelectronics/STM32CubeF4`
-
+```
+git clone --recursive https://github.com/FreeRTOS/FreeRTOS
+```
+```
+git clone --recursive https://github.com/STMicroelectronics/STM32CubeF4
+```
 If you use a different STM32F4xx board with this port, you need to change the
 following:
 

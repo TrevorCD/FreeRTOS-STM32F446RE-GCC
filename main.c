@@ -127,6 +127,7 @@
 //#include "iar_stm32f407zg_sk.h"
 #include "stm32f4xx.h"
 //#include "stm32f4xx_conf.h"
+#include "stm32f4xx_hal.h"
 
 /* Not sure if this header would be included by another header, but it is
  * necessary for BUTTON_MODE_EXTI and a few other enums.
@@ -392,7 +393,7 @@ static void prvSetupHardware( void )
     SystemInit();
 
     /* Ensure all priority bits are assigned as preemption priority bits. */
-    NVIC_SetPriorityGrouping( NVIC_PriorityGroup_4 );
+    NVIC_SetPriorityGrouping( NVIC_PRIORITYGROUP_4 );
 
     /* Setup the LED outputs. */
     vParTestInitialise();

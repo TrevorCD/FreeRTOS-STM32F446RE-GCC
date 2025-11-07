@@ -36,8 +36,7 @@ CFLAGS += -I./ \
           -I$(DRIVERS)CMSIS/Device/ST/STM32F4xx/Include \
           -I$(DEMO) \
           -I$(KERNEL)include \
-          -I$(KERNEL)portable/GCC/ARM_CM4F \
-#          -I./Libraries/STM32F4xx_StdPeriph_Driver/inc \
+          -I$(KERNEL)portable/GCC/ARM_CM4F
 
 # Preprocessor definitions
 CFLAGS += -DSTM32F446xx

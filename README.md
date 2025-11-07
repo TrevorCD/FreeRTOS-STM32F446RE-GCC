@@ -3,7 +3,9 @@
 Author: Trevor Calderwood
 
 The FreeRTOS STM32F4xx Demo ported to GCC from IAR Workbench.
-This port is a work in progress
+Additionally, standard peripheral drivers are updated to the new HAL CMSIS
+drivers.
+This port is a work in progress.
 
 ## Dependencies
 

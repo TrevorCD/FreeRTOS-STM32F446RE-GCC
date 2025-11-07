@@ -127,7 +127,7 @@
 //#include "iar_stm32f407zg_sk.h"
 #include "stm32f4xx.h"
 //#include "stm32f4xx_conf.h"
-#include "stm32f4xx_hal.h"
+#include "stm32f4xx_nucleo.h"
 
 /* Not sure if this header would be included by another header, but it is
  * necessary for BUTTON_MODE_EXTI and a few other enums.

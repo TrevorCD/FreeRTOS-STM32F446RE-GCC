@@ -44,7 +44,8 @@ CFLAGS += -I./ \
 CFLAGS += -DSTM32F446xx
 
 # Vendor supplied script for flashing to MCU
-LDSCRIPT := STM32F446RE_FLASH.ld
+LDSCRIPT := STM32F446RETX_FLASH.ld
+
 # Linker flags
 CFLAGS += -T $(LDSCRIPT) -nostartfiles -Wl,--gc-sections
 

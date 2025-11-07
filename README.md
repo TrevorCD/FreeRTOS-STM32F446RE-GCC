@@ -11,12 +11,17 @@ This port is a work in progress
 * make
 * arm-none-eabi-gcc
 * st-link
+* STM32CubeF4
 
 ## Usage
 
 Clone the [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS) and
-[FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel) repositories
-into the project, following the [Directory Structure](#directory-structure).
+[STM32CubeF4](https://github.com/STMicroelectronics/STM32CubeF4) repositories
+into the project, using the --recursive flag.
+
+`git clone --recursive https://github.com/FreeRTOS/FreeRTOS`
+
+`git clone --recursive https://github.com/STMicroelectronics/STM32CubeF4`
 
 ### Make
 
@@ -28,6 +33,10 @@ The Makefile includes three targets:
 ## Directory Structure
 
 * FreeRTOS-STM32F446RE-GCC/
+  * [STM32CubeF4/](https://github.com/STMicroelectronics/STM32CubeF4)
   * [FreeRTOS/](https://github.com/FreeRTOS/FreeRTOS)
     * FreeRTOS/  
       * [Source/](https://github.com/FreeRTOS/FreeRTOS-Kernel)
+
+> [!NOTE]
+> If using the `--recursive` flag when cloning the above directories, you don't need to separately clone the FreeRTOS-Kernel repository (FreeRTOS/FreeRTOS/Source).

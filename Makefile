@@ -28,7 +28,7 @@ AS := arm-none-eabi-as
 CP := arm-none-eabi-objcopy
 
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
-CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g -v
+CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g
 
 CFLAGS += -I./ \
           -I./include \

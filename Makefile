@@ -34,6 +34,7 @@ CFLAGS += -I./ \
           -I./include \
           -I$(DRIVERS)CMSIS/Include \
           -I$(DRIVERS)CMSIS/Device/ST/STM32F4xx/Include \
+          -I$(DRIVERS)BSP/STM32F4xx-Nucleo \
           -I$(DEMO) \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F

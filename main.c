@@ -401,7 +401,8 @@ static void prvSetupHardware( void )
     /* Configure the button input.  This configures the interrupt to use the
      * lowest interrupt priority, so it is ok to use the ISR safe FreeRTOS API
      * from the button interrupt handler. */
-    STM_EVAL_PBInit( BUTTON_USER, BUTTON_MODE_EXTI );
+	BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+
 }
 /*-----------------------------------------------------------*/
 
@@ -435,27 +436,42 @@ void vApplicationTickHook( void )
 
 static void prvSetupNestedFPUInterruptsTest( void )
 {
-    NVIC_InitTypeDef NVIC_InitStructure;
+	// outdated iterrupt struct
+    //NVIC_InitTypeDef NVIC_InitStructure;
 
     /* Enable the TIM2 interrupt in the NVIC.  The timer itself is not used,
      * just its interrupt vector to force nesting from software.  TIM2 must have
      * a lower priority than TIM3, and both must have priorities above
      * configMAX_SYSCALL_INTERRUPT_PRIORITY. */
+	HAL_NVIC_SetPriority(TIM2_IRQn,
+						 configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY -1,
+						 0);
+	HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+	/* Outdated TIM2 NVIC Init
     NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY - 1;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init( &NVIC_InitStructure );
-
+	*/
+	
     /* Enable the TIM3 interrupt in the NVIC.  The timer itself is not used,
      * just its interrupt vector to force nesting from software.  TIM2 must have
      * a lower priority than TIM3, and both must have priorities above
      * configMAX_SYSCALL_INTERRUPT_PRIORITY. */
+	HAL_NVIC_SetPriority(TIM3_IRQn,
+						 configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY -2,
+						 0);
+	HAL_NVIC_EnableIRQ(TIM3_IRQn);
+	
+	/* Outdated TIM3 NVIC Init
     NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY - 2;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init( &NVIC_InitStructure );
+	*/
 }
 /*-----------------------------------------------------------*/
 
@@ -577,7 +593,9 @@ void EXTI9_5_IRQHandler( void )
 
     /* Only line 6 is enabled, so there is no need to test which line generated
      * the interrupt. */
-    EXTI_ClearITPendingBit( EXTI_Line6 );
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
+	// outdated version of the same function call:
+    //EXTI_ClearITPendingBit( EXTI_Line6 );
 
     /* This interrupt does nothing more than demonstrate how to synchronise a
      * task with an interrupt.  First the handler releases a semaphore.

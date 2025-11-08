@@ -12,6 +12,7 @@ This port is a work in progress.
 * FreeRTOS
 * make
 * arm-none-eabi-gcc
+  * arm-none-eabi-newlib
 * st-link
 * STM32CubeF4
 

@@ -50,13 +50,13 @@ LDSCRIPT := STM32F446RETX_FLASH.ld
 LDFLAGS += -T $(LDSCRIPT) -nostartfiles -Wl,--gc-sections
 
 SRCS := main.c \
-       $(KERNEL)tasks.c \
-       $(KERNEL)queue.c \
-       $(KERNEL)list.c \
-       $(KERNEL)portable/MemMang/heap_4.c \
-       $(KERNEL)portable/GCC/ARM_CM4F/port.c \
-       ./startup/startup_stm32f4xx.s \
-       ./startup/system_stm32f4xx.c
+        ./startup/startup_stm32f4xx.s \
+        ./startup/system_stm32f4xx.c \
+        $(KERNEL)tasks.c \
+        $(KERNEL)queue.c \
+        $(KERNEL)list.c \
+        $(KERNEL)portable/MemMang/heap_4.c \
+        $(KERNEL)portable/GCC/ARM_CM4F/port.c
 
 OBJS := $(SRCS:.c=.o)
 

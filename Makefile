@@ -50,7 +50,7 @@ LDSCRIPT := STM32F446RETX_FLASH.ld
 LDFLAGS += -T $(LDSCRIPT) -nostartfiles -Wl,--gc-sections
 
 SRCS := main.c \
-        ./startup/startup_stm32f4xx.s \
+        ./startup/startup_stm32f446xx.s \
         ./startup/system_stm32f4xx.c \
         $(KERNEL)tasks.c \
         $(KERNEL)queue.c \

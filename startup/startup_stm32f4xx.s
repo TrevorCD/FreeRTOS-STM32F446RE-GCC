@@ -1,4 +1,4 @@
-;********************************************************************************
+;*******************************************************************************
 ;* File Name          : startup_stm32f407xx.s
 ;* Author             : MCD Application Team
 ;* Description        : STM32F407xx devices vector table for EWARM toolchain.
@@ -11,7 +11,7 @@
 ;*                        calls main()).
 ;*                      After Reset the Cortex-M4 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
-;********************************************************************************
+;*******************************************************************************
 ;* @attention
 ;*
 ;* <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.

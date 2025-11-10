@@ -17,7 +17,7 @@
 
 # File path macros should include trailing '/'.
 # Path to common headers for FreeRTOS Demos: Demo/Common/include
-DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/include/
+DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/
 # Path to FreeRTOS Kernel source code
 KERNEL := ./FreeRTOS/FreeRTOS/Source/
 # Path to STM32CubeF4 CMSIS Drivers
@@ -31,12 +31,12 @@ CP := arm-none-eabi-objcopy
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g
 
 CFLAGS += -I./ \
-          -I./include \
+          -Iinclude \
           -I$(DRIVERS)CMSIS/Include \
           -I$(DRIVERS)CMSIS/Device/ST/STM32F4xx/Include \
           -I$(DRIVERS)BSP/STM32F4xx-Nucleo \
           -I$(DRIVERS)STM32F4xx_HAL_Driver/Inc \
-          -I$(DEMO) \
+          -I$(DEMO)include \
           -I$(KERNEL)include \
           -I$(KERNEL)portable/GCC/ARM_CM4F
 
@@ -49,17 +49,31 @@ LDSCRIPT := STM32F446RETX_FLASH.ld
 # Linker flags
 LDFLAGS += -T $(LDSCRIPT) -nostartfiles -Wl,--gc-sections
 
-SRCS := main.c \
-        ./startup/startup_stm32f446xx.s \
-        ./startup/system_stm32f4xx.c \
+SRCS := src/main.c \
+        src/partest.c \
+        src/system_stm32f4xx.c \
         $(KERNEL)tasks.c \
         $(KERNEL)queue.c \
         $(KERNEL)list.c \
         $(KERNEL)portable/MemMang/heap_4.c \
-        $(KERNEL)portable/GCC/ARM_CM4F/port.c
+        $(KERNEL)portable/GCC/ARM_CM4F/port.c \
+        $(DEMO)Minimal/flash.c \
+        $(DEMO)Minimal/flop.c \
+        $(DEMO)Minimal/integer.c \
+        $(DEMO)Minimal/PollQ.c \
+        $(DEMO)Minimal/semtest.c \
+        $(DEMO)Minimal/dynamic.c \
+        $(DEMO)Minimal/BlockQ.c \
+        $(DEMO)Minimal/blocktim.c \
+        $(DEMO)Minimal/countsem.c \
+        $(DEMO)Minimal/GenQTest.c \
+        $(DEMO)Minimal/recmutex.c \
+        $(DEMO)Minimal/death.c
 
 OBJS := $(SRCS:.c=.o)
 
+# ASM files not included in OBJS. Prevents 'make clean' from deleting .s files.
+SRCS += src/startup_stm32f446xx.s
 
 #----------------------------------[ Targets ]----------------------------------
 

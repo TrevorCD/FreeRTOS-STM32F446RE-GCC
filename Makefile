@@ -70,17 +70,17 @@ SRCS := src/main.c \
         $(DEMO)Minimal/recmutex.c \
         $(DEMO)Minimal/death.c
 
-OBJS := $(SRCS:.c=.o)
-
 # ASM files not included in OBJS. Prevents 'make clean' from deleting .s files.
-SRCS += src/startup_stm32f446xx.s
+ASRCS := src/startup_stm32f446xx.s
+
+OBJS := $(SRCS:.c=.o)
 
 #----------------------------------[ Targets ]----------------------------------
 
 all: main.elf
 
-main.elf: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
+main.elf: $(OBJS) $(ASRCS)
+	$(CC) $(CFLAGS) $(OBJS) $(ASRCS) $(LDFLAGS) -o $@
 
 flash: main.elf
 	st-flash write main.elf 0x8000000

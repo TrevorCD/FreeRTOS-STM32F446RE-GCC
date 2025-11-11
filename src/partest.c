@@ -40,19 +40,16 @@
 #include "stm32f4xx_nucleo.h"
 
 /* Only the LEDs on one of the two seven segment displays are used. */
-#define partstMAX_LEDS		4
+#define partstMAX_LEDS		1
 
-static const Led_TypeDef xLEDs[ partstMAX_LEDS ] = { LED1, LED2, LED3, LED4 };
+static const Led_TypeDef xLEDs[ partstMAX_LEDS ] = { LED2 };
 
 /*-----------------------------------------------------------*/
 
 void vParTestInitialise( void )
 {
-	/* Initialise all four LEDs that are built onto the starter kit. */
-	BSP_LED_Init( LED1 );
+	/* Initialise LED2 which is built onto the board. */
 	BSP_LED_Init( LED2 );
-	BSP_LED_Init( LED3 );
-	BSP_LED_Init( LED4 );
 }
 /*-----------------------------------------------------------*/
 

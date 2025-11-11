@@ -26,4 +26,5 @@ typedef unsigned long uint32_t;
 // Additions:
 typedef long long int64_t;
 typedef unsigned long long uint64_t;
+#define SIZE_MAX __SIZE_MAX__
 #endif /* FREERTOS_STDINT */

@@ -27,20 +27,25 @@
 #include <FreeRTOSConfig.h>
 
 
-	RSEG    CODE:CODE(2)
-	thumb
+	.syntax unified
+	.cpu cortex-m4
+	.fpu fpv4-sp-d16
+	.thumb
+	
+	.text
+	.align 2
+	
+	.extern ulRegTest1LoopCounter
+	.extern ulRegTest2LoopCounter
 
-	EXTERN ulRegTest1LoopCounter
-	EXTERN ulRegTest2LoopCounter
-
-	PUBLIC vRegTest1Task
-	PUBLIC vRegTest2Task
-	PUBLIC vRegTestClearFlopRegistersToParameterValue
-	PUBLIC ulRegTestCheckFlopRegistersContainParameterValue
+	.global vRegTest1Task
+	.global vRegTest2Task
+	.global vRegTestClearFlopRegistersToParameterValue
+	.global ulRegTestCheckFlopRegistersContainParameterValue
 	
 /*-----------------------------------------------------------*/
 
-vRegTest1Task
+vRegTest1Task:	
 
 	/* Fill the core registers with known values. */
 	mov r0, #100
@@ -167,12 +172,12 @@ reg1_loop:
 	/* VFP register test passed.  Jump to the core register test. */
 	b reg1_loopf_pass
 
-reg1_error_loopf
+reg1_error_loopf:	
 	/* If this line is hit then a VFP register value was found to be
 	incorrect. */
 	b reg1_error_loopf
 
-reg1_loopf_pass
+reg1_loopf_pass:	
 
 	cmp	r0, #100
 	bne	reg1_error_loop
@@ -220,7 +225,7 @@ reg1_error_loop:
 /*-----------------------------------------------------------*/
 
 
-vRegTest2Task
+vRegTest2Task:	
 
 	/* Set all the core registers to known values. */
 	mov r0, #-1
@@ -348,12 +353,12 @@ reg2_loop:
 	/* VFP register test passed.  Jump to the core register test. */
 	b reg2_loopf_pass
 
-reg2_error_loopf
+reg2_error_loopf:	
 	/* If this line is hit then a VFP register value was found to be
 	incorrect. */
 	b reg2_error_loopf
 
-reg2_loopf_pass
+reg2_loopf_pass:	
 
 	cmp	r0, #-1
 	bne	reg2_error_loop
@@ -401,7 +406,7 @@ reg2_error_loop:
 
 /*-----------------------------------------------------------*/
 
-vRegTestClearFlopRegistersToParameterValue
+vRegTestClearFlopRegistersToParameterValue:	
 
 	/* Clobber the auto saved registers. */
 	vmov d0, r0, r0
@@ -416,7 +421,7 @@ vRegTestClearFlopRegistersToParameterValue
 
 /*-----------------------------------------------------------*/
 
-ulRegTestCheckFlopRegistersContainParameterValue
+ulRegTestCheckFlopRegistersContainParameterValue:	
 
 	vmov r1, s0
 	cmp r0, r1
@@ -467,13 +472,12 @@ ulRegTestCheckFlopRegistersContainParameterValue
 	cmp r0, r1
 	bne return_error
 	
-return_pass
+return_pass:	
 	mov r0, #1
 	bx lr
 
-return_error
+return_error:	
 	mov r0, #0
 	bx lr
 
-	END
 	

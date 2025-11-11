@@ -36,7 +36,8 @@
 #include "partest.h"
 
 /* Starter kit includes. */
-#include "iar_stm32f407zg_sk.h"
+//#include "iar_stm32f407zg_sk.h"
+#include "stm32f4xx_nucleo.h"
 
 /* Only the LEDs on one of the two seven segment displays are used. */
 #define partstMAX_LEDS		4
@@ -48,10 +49,10 @@ static const Led_TypeDef xLEDs[ partstMAX_LEDS ] = { LED1, LED2, LED3, LED4 };
 void vParTestInitialise( void )
 {
 	/* Initialise all four LEDs that are built onto the starter kit. */
-	STM_EVAL_LEDInit( LED1 );
-	STM_EVAL_LEDInit( LED2 );
-	STM_EVAL_LEDInit( LED3 );
-	STM_EVAL_LEDInit( LED4 );
+	BSP_LED_Init( LED1 );
+	BSP_LED_Init( LED2 );
+	BSP_LED_Init( LED3 );
+	BSP_LED_Init( LED4 );
 }
 /*-----------------------------------------------------------*/
 
@@ -61,11 +62,11 @@ void vParTestSetLED( unsigned long ulLED, signed portBASE_TYPE xValue )
 	{
 		if( xValue == pdTRUE )
 		{
-			STM_EVAL_LEDOn( xLEDs[ ulLED ] );
+			BSP_LED_On( xLEDs[ ulLED ] );
 		}
 		else
 		{
-			STM_EVAL_LEDOff( xLEDs[ ulLED ] );
+			BSP_LED_Off( xLEDs[ ulLED ] );
 		}
 	}
 }
@@ -77,7 +78,7 @@ void vParTestToggleLED( unsigned long ulLED )
 	{
 		taskENTER_CRITICAL();
 		{
-			STM_EVAL_LEDToggle( xLEDs[ ulLED ] );
+			BSP_LED_Toggle( xLEDs[ ulLED ] );
 		}
 		taskEXIT_CRITICAL();
 	}

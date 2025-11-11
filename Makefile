@@ -4,9 +4,11 @@
 #
 # File paths in this Makefile assume the same structure as the FreeRTOS github
 # repository. FreeRTOS/FreeRTOS/Source contains the FreeRTOS-Kernel repository.
+# The STM32CubeF4 github repository is also referenced by DRIVERS.
 #
 # FreeRTOS:           https://github.com/FreeRTOS/FreeRTOS
 # FreeRTOS-Kernel:    https://github.com/FreeRTOS/FreeRTOS-Kernel
+# STM32CubeF4:        https://github.com/STMicroelectronics/STM32CubeF4
 #
 # Dependencies:
 #   - arm-none-eabi-gcc
@@ -15,12 +17,12 @@
 
 #-------------------------------[ Build Config ]--------------------------------
 
-# File path macros should include trailing '/'.
-# Path to common headers for FreeRTOS Demos: Demo/Common/include
+# File path macros must include trailing '/'
+# Path to FreeRTOS Common Demo files. Should have Minimal/ and include/ subdirs
 DEMO  := ./FreeRTOS/FreeRTOS/Demo/Common/
-# Path to FreeRTOS Kernel source code
+# Path to FreeRTOS Kernel source. Should have portable/ and include/ subdirs
 KERNEL := ./FreeRTOS/FreeRTOS/Source/
-# Path to STM32CubeF4 CMSIS Drivers
+# Path to STM32CubeF4 Drivers. Should have BSP/ and CMSIS/ subdirs
 DRIVERS := ./STM32CubeF4/Drivers/
 
 CC := arm-none-eabi-gcc
@@ -30,7 +32,7 @@ CP := arm-none-eabi-objcopy
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g
 
-CFLAGS += -I./ \
+CFLAGS += -I. \
           -Iinclude \
           -I$(DRIVERS)CMSIS/Include \
           -I$(DRIVERS)CMSIS/Device/ST/STM32F4xx/Include \
@@ -57,6 +59,7 @@ SRCS := src/main.c \
         $(KERNEL)list.c \
         $(KERNEL)portable/MemMang/heap_4.c \
         $(KERNEL)portable/GCC/ARM_CM4F/port.c \
+        $(DRIVERS)BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c \
         $(DEMO)Minimal/flash.c \
         $(DEMO)Minimal/flop.c \
         $(DEMO)Minimal/integer.c \

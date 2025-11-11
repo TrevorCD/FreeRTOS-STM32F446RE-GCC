@@ -57,6 +57,8 @@ SRCS := src/main.c \
         $(KERNEL)tasks.c \
         $(KERNEL)queue.c \
         $(KERNEL)list.c \
+        $(KERNEL)timers.c \
+        $(KERNEL)event_groups.c \
         $(KERNEL)portable/MemMang/heap_4.c \
         $(KERNEL)portable/GCC/ARM_CM4F/port.c \
         $(DRIVERS)BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c \
@@ -74,7 +76,8 @@ SRCS := src/main.c \
         $(DEMO)Minimal/death.c
 
 # ASM files not included in OBJS. Prevents 'make clean' from deleting .s files.
-ASRCS := src/startup_stm32f446xx.s
+ASRCS := src/startup_stm32f446xx.s \
+         src/RegTest.s
 
 OBJS := $(SRCS:.c=.o)
 

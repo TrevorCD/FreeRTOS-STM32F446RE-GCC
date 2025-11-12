@@ -56,3 +56,7 @@ dkms.conf
 
 # Emacs buffers
 *~
+
+# Cloned in repos
+./STM32CubeF4/*
+./FreeRTOS/*

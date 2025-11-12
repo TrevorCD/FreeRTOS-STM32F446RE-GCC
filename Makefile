@@ -62,9 +62,13 @@ AS := arm-none-eabi-as
 CP := arm-none-eabi-objcopy
 
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
+# Microcontroller flags
 CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CFLAGS += $(BOARD)
 
+# General compilation flags
 CFLAGS += -O2 -g -std=c99
+
 # Include dirs
 CFLAGS += -I. \
           -Iinclude \
@@ -119,7 +123,7 @@ OBJS := $(SRCS:.c=.o)
 all: main.elf
 
 main.elf: $(OBJS) $(ASM_SRCS)
-	$(CC) $(CFLAGS) $(BOARD) $(OBJS) $(ASM_SRCS) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(ASM_SRCS) $(LDFLAGS) -o $@
 
 flash: main.elf
 	st-flash write main.elf 0x8000000

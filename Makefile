@@ -84,6 +84,7 @@ CFLAGS += -I. \
 LDFLAGS += -T $(FLASH_SCRIPT) -nostartfiles -Wl,--gc-sections
 
 SRCS := src/main.c \
+        src/stubs.c \
         src/partest.c \
         src/system_stm32f4xx.c \
         $(DEMO_COMMON)/Minimal/flash.c \
@@ -110,7 +111,11 @@ SRCS := src/main.c \
         $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
         $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
         $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
-        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
 
 # ASM files not included in OBJS. Prevents 'make clean' from deleting .s files.
 ASM_SRCS := src/startup_stm32f446xx.s \

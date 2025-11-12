@@ -62,8 +62,9 @@ AS := arm-none-eabi-as
 CP := arm-none-eabi-objcopy
 
 # Not mentioned in datasheet: M4 FPU has 16 double percision fp registers (d16)
-CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O2 -g
+CFLAGS := -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
+CFLAGS += -O2 -g -std=c99
 # Include dirs
 CFLAGS += -I. \
           -Iinclude \
@@ -100,7 +101,12 @@ SRCS := src/main.c \
         $(KERNEL_DIR)/event_groups.c \
         $(KERNEL_DIR)/portable/MemMang/heap_4.c \
         $(KERNEL_DIR)/portable/GCC/ARM_CM4F/port.c \
-        $(STM_DRIVERS)/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c
+        $(STM_DRIVERS)/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+        $(STM_DRIVERS)/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
 
 # ASM files not included in OBJS. Prevents 'make clean' from deleting .s files.
 ASM_SRCS := src/startup_stm32f446xx.s \

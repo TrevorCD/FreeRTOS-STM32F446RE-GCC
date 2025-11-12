@@ -58,5 +58,5 @@ dkms.conf
 *~
 
 # Cloned in repos
-./STM32CubeF4/*
-./FreeRTOS/*
+STM32CubeF4
+FreeRTOS

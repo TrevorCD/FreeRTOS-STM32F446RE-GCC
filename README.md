@@ -1,7 +1,5 @@
 # FreeRTOS STM32F446RE GCC
 
-Author: Trevor Calderwood
-
 The FreeRTOS STM32F4xx Demo ported to GCC from IAR Workbench.
 The files main.c, ParTest.s, FreeRTOSConfig.h, and stm32f4xx_conf.h are
 sourced from the CORTEX_M4F_STM32F407ZG-SK demo. 
@@ -29,6 +27,8 @@ git clone --recursive https://github.com/FreeRTOS/FreeRTOS
 ```
 git clone --recursive https://github.com/STMicroelectronics/STM32CubeF4
 ```
+### Config
+
 If you use a different STM32F4xx board with this port, you need to change the
 following:
 
@@ -36,10 +36,13 @@ following:
   * In Build Config, change `-DSTM32F446xx` to the appropriate definition for your board. This sets the appropriate board specific includes in stm32f4xx.h. To check which definition matches your board, find this file in `./STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Include`.
   * In Build Config, change `LDSCRIPT` to match your board. Also, move the appropriate script to `./`. The flash script can be found in `./STM32CubeF4/Projects/[BOARD NAME]/Templates/STM32CubeIDE/`.
 
+You may need to change the FREERTOS_ROOT and STM_DRIVERS macros in the Makefile
+if the paths do not match the [directory structure](#directory-structure).
+
 ### Make
 
 The Makefile includes three targets:
-* all (main.elf): the FreeRTOS binary
+* all: compiles the FreeRTOS image (main.elf)
 * flash: flashes main.elf to the STM32F446RE using st-link
 * clean
 

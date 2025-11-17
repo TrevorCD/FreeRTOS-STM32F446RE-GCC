@@ -41,7 +41,7 @@ if the paths do not match the [directory structure](#directory-structure).
 
 ### Make
 
-The Makefile includes three targets:
+The Makefile includes these targets:
 * all: compiles the FreeRTOS image (main.elf)
 * flash: flashes main.elf to the STM32F446RE using st-link
 * clean

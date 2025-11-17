@@ -54,6 +54,8 @@ FLASH_SCRIPT := STM32F446RETX_FLASH.ld
 
 # Path to FreeRTOS Common Demo files. Should have Minimal/ and include/ subdirs
 DEMO_COMMON := $(FREERTOS_ROOT)/Demo/Common
+
+DEMO_COMMON_LOCAL := ./Demo/Common
 # Path to FreeRTOS Kernel source. Should have portable/ and include/ subdirs
 KERNEL_DIR := $(FREERTOS_ROOT)/Source
 
@@ -87,18 +89,18 @@ SRCS := src/main.c \
         src/stubs.c \
         src/partest.c \
         src/system_stm32f4xx.c \
-        $(DEMO_COMMON)/Minimal/flash.c \
-        $(DEMO_COMMON)/Minimal/flop.c \
-        $(DEMO_COMMON)/Minimal/integer.c \
-        $(DEMO_COMMON)/Minimal/PollQ.c \
-        $(DEMO_COMMON)/Minimal/semtest.c \
-        $(DEMO_COMMON)/Minimal/dynamic.c \
-        $(DEMO_COMMON)/Minimal/BlockQ.c \
-        $(DEMO_COMMON)/Minimal/blocktim.c \
-        $(DEMO_COMMON)/Minimal/countsem.c \
-        $(DEMO_COMMON)/Minimal/GenQTest.c \
-        $(DEMO_COMMON)/Minimal/recmutex.c \
-        $(DEMO_COMMON)/Minimal/death.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/flash.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/flop.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/integer.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/PollQ.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/semtest.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/dynamic.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/BlockQ.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/blocktim.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/countsem.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/GenQTest.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/recmutex.c \
+        $(DEMO_COMMON_LOCAL)/Minimal/death.c \
         $(KERNEL_DIR)/tasks.c \
         $(KERNEL_DIR)/queue.c \
         $(KERNEL_DIR)/list.c \
@@ -135,3 +137,7 @@ flash: main.elf
 
 clean:
 	rm -f $(OBJS) main.elf
+
+debug:
+	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg &
+	arm-none-eabi-gdb main.elf

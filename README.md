@@ -45,6 +45,8 @@ The Makefile includes three targets:
 * all: compiles the FreeRTOS image (main.elf)
 * flash: flashes main.elf to the STM32F446RE using st-link
 * clean
+* debug: starts an openocd server to communicate with the st-link and attaches gdb
+* gdb: starts gdb and attaches (if the server is already running)
 
 ## Directory Structure
 

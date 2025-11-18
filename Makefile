@@ -139,7 +139,6 @@ clean:
 	rm -f $(OBJS) main.elf
 
 debug:
-	pkill openocd
 	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg &
 	arm-none-eabi-gdb main.elf
 

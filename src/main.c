@@ -2,22 +2,23 @@
  * FreeRTOS V202212.00
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  *
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
@@ -50,10 +51,10 @@
  * configUSE_TICK_HOOK to 0 in FreeRTOSConfig.h.
  ******************************************************************************
  *
- * main() creates all the demo application tasks and software timers, then starts
- * the scheduler.  The web documentation provides more details of the standard
- * demo application tasks, which provide no particular functionality, but do
- * provide a good example of how to use the FreeRTOS API.
+ * main() creates all the demo application tasks and software timers, then
+ * starts the scheduler.  The web documentation provides more details of the
+ * standard demo application tasks, which provide no particular functionality,
+ * but do provide a good example of how to use the FreeRTOS API.
  *
  * In addition to the standard demo tasks, the following tasks and tests are
  * defined and/or created within this file:
@@ -144,21 +145,21 @@
 #define mainDONT_BLOCK                             ( 0UL )
 
 /* The period after which the check timer will expire, in ms, provided no errors
- * have been reported by any of the standard demo tasks.  ms are converted to the
- * equivalent in ticks using the portTICK_PERIOD_MS constant. */
-#define mainCHECK_TIMER_PERIOD_MS                  ( 3000UL / portTICK_PERIOD_MS )
+ * have been reported by any of the standard demo tasks.  ms are converted to
+ * the equivalent in ticks using the portTICK_PERIOD_MS constant. */
+#define mainCHECK_TIMER_PERIOD_MS                ( 3000UL / portTICK_PERIOD_MS )
 
 /* The period at which the check timer will expire, in ms, if an error has been
- * reported in one of the standard demo tasks.  ms are converted to the equivalent
- * in ticks using the portTICK_PERIOD_MS constant. */
-#define mainERROR_CHECK_TIMER_PERIOD_MS            ( 200UL / portTICK_PERIOD_MS )
+ * reported in one of the standard demo tasks.  ms are converted to the
+ * equivalent in ticks using the portTICK_PERIOD_MS constant. */
+#define mainERROR_CHECK_TIMER_PERIOD_MS          ( 200UL / portTICK_PERIOD_MS )
 
 /* Set mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY to 1 to create a simple demo.
  * Set mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY to 0 to create a much more
- * comprehensive test application.  See the comments at the top of this file, and
- * the documentation page on the http://www.FreeRTOS.org web site for more
+ * comprehensive test application.  See the comments at the top of this file,
+ * and the documentation page on the http://www.FreeRTOS.org web site for more
  * information. */
-#define mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY    0
+#define mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY    1
 
 /*-----------------------------------------------------------*/
 
@@ -206,12 +207,18 @@ static void prvButtonTestTask( void * pvParameters );
  */
 static void prvOptionallyCreateComprehensveTestApplication( void );
 
+/*
+ * Private function prototypes for System Clock init
+ */
+static void SystemClock_Config(void);
+static void Error_Handler(void);
+
 /*-----------------------------------------------------------*/
 
 /* The following two variables are used to communicate the status of the
  * register check tasks to the check software timer.  If the variables keep
- * incrementing, then the register check tasks have not discovered any errors.  If
- * a variable stops incrementing, then an error has been found. */
+ * incrementing, then the register check tasks have not discovered any errors.
+ * If a variable stops incrementing, then an error has been found. */
 volatile unsigned long ulRegTest1LoopCounter = 0UL, ulRegTest2LoopCounter = 0UL;
 
 /* The following variables are used to verify that the interrupt nesting depth
@@ -242,7 +249,7 @@ int main( void )
      * 0 (at the top of this file).  See the comments at the top of this file for
      * more information. */
     vStartLEDFlashTasks( mainFLASH_TASK_PRIORITY );
-
+	
     /* The following function will only create more tasks and timers if
      * mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to 0 (at the top of this
      * file).  See the comments at the top of this file for more information. */
@@ -355,7 +362,8 @@ static void prvCheckTimerCallback( TimerHandle_t xTimer )
             /* This call to xTimerChangePeriod() uses a zero block time.
              * Functions called from inside of a timer callback function must
              * never* attempt	to block. */
-            xTimerChangePeriod( xTimer, ( mainERROR_CHECK_TIMER_PERIOD_MS ), mainDONT_BLOCK );
+            xTimerChangePeriod( xTimer, ( mainERROR_CHECK_TIMER_PERIOD_MS ),
+								mainDONT_BLOCK );
         }
     }
 }
@@ -385,8 +393,10 @@ static void prvButtonTestTask( void * pvParameters )
 static void prvSetupHardware( void )
 {
     /* Setup STM32 system (clock, PLL and Flash configuration) */
-    SystemInit();
-
+    //SystemInit(); called by startup_stm32f4xx.s
+	HAL_Init();
+	SystemClock_Config();
+	
     /* Ensure all priority bits are assigned as preemption priority bits. */
     NVIC_SetPriorityGrouping( NVIC_PRIORITYGROUP_4 );
 
@@ -541,15 +551,18 @@ static void prvOptionallyCreateComprehensveTestApplication( void )
 
         /* Create the register check tasks, as described at the top of this
          * file */
-        xTaskCreate( vRegTest1Task, "Reg1", configMINIMAL_STACK_SIZE, ( void * ) NULL, tskIDLE_PRIORITY, NULL );
-        xTaskCreate( vRegTest2Task, "Reg2", configMINIMAL_STACK_SIZE, ( void * ) NULL, tskIDLE_PRIORITY, NULL );
+        xTaskCreate( vRegTest1Task, "Reg1", configMINIMAL_STACK_SIZE,
+					 ( void * ) NULL, tskIDLE_PRIORITY, NULL );
+        xTaskCreate( vRegTest2Task, "Reg2", configMINIMAL_STACK_SIZE,
+					 ( void * ) NULL, tskIDLE_PRIORITY, NULL );
 
         /* Create the semaphore that is used to demonstrate a task being
          * synchronised with an interrupt. */
         vSemaphoreCreateBinary( xTestSemaphore );
 
         /* Create the task that is unblocked by the demonstration interrupt. */
-        xTaskCreate( prvButtonTestTask, "BtnTest", configMINIMAL_STACK_SIZE, ( void * ) NULL, tskIDLE_PRIORITY, NULL );
+        xTaskCreate( prvButtonTestTask, "BtnTest", configMINIMAL_STACK_SIZE,
+					 ( void * ) NULL, tskIDLE_PRIORITY, NULL );
 
         /* Create the software timer that performs the 'check' functionality,
          * as described at the top of this file. */
@@ -657,3 +670,86 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask,
     }
 }
 /*-----------------------------------------------------------*/
+
+/**
+ * @brief  System Clock Configuration
+ *         The system Clock is configured as follow :
+ *            System Clock source            = PLL (HSI)
+ *            SYSCLK(Hz)                     = 84000000
+ *            HCLK(Hz)                       = 84000000
+ *            AHB Prescaler                  = 1
+ *            APB1 Prescaler                 = 2
+ *            APB2 Prescaler                 = 1
+ *            HSI Frequency(Hz)              = 16000000
+ *            PLL_M                          = 8
+ *            PLL_N                          = 128
+ *            PLL_P                          = 4
+ *            PLL_Q                          = 8
+ *            PLL_R                          = 0
+ *            VDD(V)                         = 3.3
+ *            Main regulator output voltage  = Scale1 mode
+ *            Flash Latency(WS)              = 2
+ * @param  None
+ * @retval None
+ */
+static void SystemClock_Config(void)
+{
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+
+	/* Enable Power Control clock */
+	__HAL_RCC_PWR_CLK_ENABLE();
+
+	/* The voltage scaling allows optimizing the power consumption when the
+	   device is clocked below the maximum system frequency, to update the
+	   voltage scaling value regarding system frequency refer to product
+	   datasheet.  */
+	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+	/* Enable HSI Oscillator and activate PLL with HSI as source */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+	
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+	
+	RCC_OscInitStruct.PLL.PLLM = 8;
+	RCC_OscInitStruct.PLL.PLLN = 128;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+	RCC_OscInitStruct.PLL.PLLQ = 8;
+	RCC_OscInitStruct.PLL.PLLR = 0;
+
+	if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+		{
+			Error_Handler();
+		}
+
+	/* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+	   clocks dividers */
+	RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+								   RCC_CLOCKTYPE_PCLK1  | RCC_CLOCKTYPE_PCLK2);
+	
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV8; // was 1
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;  // was 2
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+	
+	if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+		{
+			Error_Handler();
+		}
+}
+
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @param  None
+ * @retval None
+ */
+static void Error_Handler(void)
+{
+	/* User may add here some code to deal with this error */
+	while(1)
+		{
+		}
+}

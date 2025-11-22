@@ -133,10 +133,11 @@ main.elf: $(OBJS) $(ASM_SRCS)
 	$(CC) $(CFLAGS) $(OBJS) $(ASM_SRCS) $(LDFLAGS) -o $@
 
 flash: main.elf
-	st-flash write main.elf 0x8000000
+	$(CP) -O binary main.elf main.bin
+	st-flash write main.bin 0x8000000
 
 clean:
-	rm -f $(OBJS) main.elf
+	rm -f $(OBJS) main.elf main.bin
 
 debug:
 	openocd -f interface/stlink.cfg -f target/stm32f4x.cfg &

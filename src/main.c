@@ -139,7 +139,7 @@
 #define mainFLOP_TASK_PRIORITY                     ( tskIDLE_PRIORITY )
 
 /* The LED used by the check timer. */
-#define mainCHECK_LED                              ( 3UL )
+#define mainCHECK_LED                              ( 0UL )
 
 /* A block time of zero simply means "don't block". */
 #define mainDONT_BLOCK                             ( 0UL )
@@ -159,7 +159,7 @@
  * comprehensive test application.  See the comments at the top of this file,
  * and the documentation page on the http://www.FreeRTOS.org web site for more
  * information. */
-#define mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY    1
+#define mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY    0
 
 /*-----------------------------------------------------------*/
 
@@ -248,7 +248,9 @@ int main( void )
      * tasks are only created if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to
      * 0 (at the top of this file).  See the comments at the top of this file for
      * more information. */
+#if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY
     vStartLEDFlashTasks( mainFLASH_TASK_PRIORITY );
+#endif
 	
     /* The following function will only create more tasks and timers if
      * mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to 0 (at the top of this

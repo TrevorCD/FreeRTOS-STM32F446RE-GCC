@@ -4,16 +4,23 @@ The FreeRTOS STM32F4xx Demo ported to GCC from IAR Workbench.
 The files main.c, ParTest.s, FreeRTOSConfig.h, and stm32f4xx_conf.h are
 sourced from the CORTEX_M4F_STM32F407ZG-SK demo. 
 Additionally, standard peripheral drivers are updated to HAL CMSIS drivers.
-This port is a work in progress.
 
 ## Dependencies
+
+### Build & Flash
 
 * FreeRTOS
 * make
 * arm-none-eabi-gcc
   * arm-none-eabi-newlib
+  * arm-none-eabi-objcopy
 * st-link
 * STM32CubeF4
+
+### Debug
+
+* arm-none-eabi-gdb
+* openocd
 
 ## Usage
 

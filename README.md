@@ -1,7 +1,7 @@
 # FreeRTOS STM32F446RE GCC
 
 The FreeRTOS STM32F4xx Demo ported to GCC from IAR Workbench.
-The files main.c, ParTest.s, FreeRTOSConfig.h, and stm32f4xx_conf.h are
+The files main.c, ParTest.s, and FreeRTOSConfig.h, are
 sourced from the CORTEX_M4F_STM32F407ZG-SK demo. 
 Additionally, standard peripheral drivers are updated to HAL CMSIS drivers.
 

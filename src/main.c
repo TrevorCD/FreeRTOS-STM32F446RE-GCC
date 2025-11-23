@@ -124,8 +124,6 @@
 #include "death.h"
 
 /* Hardware and starter kit includes. */
-//#include "arm_comm.h"
-//#include "iar_stm32f407zg_sk.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_nucleo.h"
 #include "system_stm32f4xx.h"
@@ -244,9 +242,10 @@ int main( void )
     prvSetupHardware();
 
     /* Start standard demo/test application flash tasks.  See the comments at
-     * the top of this file.  The LED flash tasks are always created.  The other
-     * tasks are only created if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to
-     * 0 (at the top of this file).  See the comments at the top of this file for
+     * the top of this file.  The LED flash tasks is created when
+	 * mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to 1.  The other tasks are
+	 * only created if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY is set to 0
+	 * (at the top of this file).  See the comments at the top of this file for
      * more information. */
 #if mainCREATE_SIMPLE_LED_FLASHER_DEMO_ONLY
     vStartLEDFlashTasks( mainFLASH_TASK_PRIORITY );

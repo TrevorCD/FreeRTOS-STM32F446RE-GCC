@@ -36,12 +36,14 @@ git clone --recursive https://github.com/STMicroelectronics/STM32CubeF4
 ```
 ### Config
 
-If you use a different STM32F4xx board with this port, you need to change the
-following:
+To use a different STM32F4xx board with this port, change the following:
 
-* ./Makefile
-  * In Build Config, change `-DSTM32F446xx` to the appropriate definition for your board. This sets the appropriate board specific includes in stm32f4xx.h. To check which definition matches your board, find this file in `./STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Include`.
-  * In Build Config, change `LDSCRIPT` to match your board. Also, move the appropriate script to `./`. The flash script can be found in `./STM32CubeF4/Projects/[BOARD NAME]/Templates/STM32CubeIDE/`.
+* Makefile
+  * In Build Config, change `-DSTM32F446xx` to the appropriate definition for your board. This sets the appropriate board specific includes in stm32f4xx.h. To check which definition matches your board, find this file in `STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Include`.
+  * In Build Config, change `LDSCRIPT` to match your board. Also, move the appropriate script to `./`. The flash script can be found in `STM32CubeF4/Projects/[BOARD NAME]/Templates/STM32CubeIDE/`.
+
+* src/startup_stm32f446xx.s
+  * Replace this file with the appropriate startup file in `STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/`.
 
 You may need to change the FREERTOS_ROOT and STM_DRIVERS macros in the Makefile
 if the paths do not match the [directory structure](#directory-structure).
